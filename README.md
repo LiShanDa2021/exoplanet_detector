@@ -4,7 +4,7 @@
 ## Presentation:
 ### Project Overview: 
 
-Our project is Exoplanet detection. Our goal is to develop a machine learning model that will determine which candidates from Keppler Space Telescope dataset are planets or not. 
+Our project is Exoplanet detection. The goal is to develop a machine learning model that will determine which candidates from Keppler Space Telescope dataset are planets or not. 
 We chose this topic because we each like and enjoy the scifi genre and we all gravitated towards outer space. We think that automating planet hunting could make the process a little more efficient. It'll also allow scientists and NASA which areas of space to focus on and may lead to more groundbreaking discoveries. We wanted to practice machine learning with a real dataset that provided additional challenges that we wanted to face head on. 
 
 ### Data:
@@ -20,15 +20,28 @@ Can we automate planet detection?
 
 ## GitHub:
 
+Communication plan: We will communicate on slack and meet via google or teams. Check in on Sundays and Tuesdays and as needed. 
 
 
+## Machine Learning:
 
-Determine what technologies we will use:
-    Python
-    HTML 
-    JavaScript
-    (Mission to Mars Challenge and Belly Button Diversity)
-    GitHub
+Supervised Machine learning algorithm using Python and Tensorflow library. At this time, still undetermined wheter we will use Random Forest, SVM, or deep learning. Deep learning might serve our well since we have so many features. End goal with machine learning is to determine if the object is an exoplanet and if it habitable planet and will then apply the algorithm to the TESS dataset. TESS (transitting exoplanet survey satellite) is an active planet hunting mission and we hope our algorithm can assist in identifying exoplanets. 
+
+
+## Database Integration:
+MongoDB- to store machine learning algorithm and then we will access the database with the HTML dashboard with a dash of javascript interactive elements. 
+
+
+## Dashboard and Visualization:
+Using HTML and JS to create an interactive dashboard to show the relative sizes of exoplanets and the stars that they orbit as well as their distance from earth. 
+
+
+## Technologies Used:
+    +Python (pandas, tensorflow, keras, sklearn)
+    +HTML 
+    +JavaScript
+    +MongoDB
+    +GitHub
 
 
 
