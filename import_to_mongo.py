@@ -15,8 +15,5 @@ def mongoimport(csv_path, db_name, coll_name, db_url='localhost', db_port=27017)
     return coll.count()
 
 planet_file = "/Users/alexhatheway/Desktop/DataViz/final_project_classes/exoplanet_detector/Cleaned_Planet_Exploration_Data.csv"
-book_file = "/Users/alexhatheway/Desktop/DataViz/final_project_classes/exoplanet_detector/books.csv"
 
-#mongoimport(planet_file, 'planetdb', 'planets')
-
-mongoimport(book_file, 'libary', 'bookshelf')
+mongoimport(planet_file, 'planetdb', 'planets')
