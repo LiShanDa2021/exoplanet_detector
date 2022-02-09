@@ -5,8 +5,9 @@ function init() {
     var selector = d3.select("#selDataset");
   
     // Use the list of sample names to populate the select options
-    d3.json("cleaned_planet_exploration_data.json").then((data) => {
-        console.log("hello");
+    d3.json("https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+pl_name,pl_masse,ra,dec+from+ps+where+upper(soltype)+like+'%CONF%'+and+pl_masse+between+0.5+and+2.0").then((data) => {
+    console.log("hello");
+    console.log(data)
     //   var sampleNames = data.names;
   
     //   sampleNames.forEach((sample) => {
