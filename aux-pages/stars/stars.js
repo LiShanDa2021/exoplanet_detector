@@ -5,29 +5,30 @@ function init() {
     var selector = d3.select("#selDataset");
   
     // Use the list of sample names to populate the select options
-    d3.json("https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+pl_name,pl_masse,ra,dec+from+ps+where+upper(soltype)+like+'%CONF%'+and+pl_masse+between+0.5+and+2.0").then((data) => {
-    console.log("hello");
-    console.log(data)
-    //   var sampleNames = data.names;
+    d3.json("https://raw.githubusercontent.com/LiShanDa2021/exoplanet_detector/main/Cleaned_Planet_Exploration_Data.json").then((data) => {
+    console.log(data["KOI_Name"])
+    //console.log(Object.keys());
+    //console.log(Object.keys(data['KOI_Name']));
+    //var koiNames = Object.keys(data['KOI_Name']);
+    //console.log(koiNames);
+    console.log(data);
+
   
-    //   sampleNames.forEach((sample) => {
+    // koiNames.forEach((name) => {
     //     selector
     //       .append("option")
-    //       .text(sample)
-    //       .property("value", sample);
+    //       .text(name)
+    //       .property("value", name);
     //   });
   
-    //   // Use the first sample from the list to build the initial plots
-    //   var firstSample = sampleNames[0];
+      // Use the first sample from the list to build the initial plots
+    //   var firstName = koiNames[0];
     //   buildCharts(firstSample);
     //   buildMetadata(firstSample);
     });
-  }
-
+    };
   
-
-  
-  // Initialize the dashboard
+  //Initialize the dashboard
 init();
   
 //   function optionChanged(newSample) {
@@ -141,7 +142,7 @@ init();
 //       value: wFreq,
 //       type: "indicator",
 //       mode: "gauge+number",
-//       title: {text: "Wash Frequency"},
+//       title: {text: "Habitability"},
 //       gauge: {
 //         axis: { range: [null, 10] },
 //         steps: [
@@ -168,5 +169,4 @@ init();
   
 //   });
   
-//   }
-  
+//}
