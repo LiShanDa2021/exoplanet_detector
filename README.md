@@ -29,7 +29,9 @@ Supervised Machine learning algorithm using Python and Tensorflow library. At th
 
 
 ## Database Integration:
-MongoDB- to store machine learning algorithm and then we will access the database with the HTML dashboard with a dash of javascript interactive elements. 
+SQL and AWS- switching from Mongo to these two. After several initial attempts to integrate, we were not having any luck. Deciding to switch to Sql for simplicity. 
+
+AWS Database- exoplanets
 
 
 ## Dashboard and Visualization:
