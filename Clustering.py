@@ -16,7 +16,7 @@ import os
 def Clustering():
 
     #Create Connection to AWS
-    database_url = 'postgresql://Brute_Force:daisy_mozart_chorizo@exoplanets1.c8rvp46kd4vt.us-east-1.rds.amazonaws.com/confirmed_planets1'
+    database_url = 'postgresql://Brute_Force:{password}@exoplanets1.c8rvp46kd4vt.us-east-1.rds.amazonaws.com/confirmed_planets1'
 
     engine= create_engine(database_url)
     connection = engine.connect()
@@ -97,7 +97,8 @@ def Clustering():
         hover_name='Class',
         hover_data=['planet_mass','planet_radius','equilibrium_temperature'])
     fig.update_layout(legend=dict(x=0, y=1))
-    fig.show()
+    return fig.show()
+
     
 
 
