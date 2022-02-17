@@ -39,7 +39,7 @@ def test_page_view():
 @app.route('/api/close_planet_data')
 def planetAPI():
     session = Session(engine)
-    close_planet_data = session.query(confirmed_planets.planet_name, confirmed_planets.distance, confirmed_planets.planet_mass, confirmed_planets.planet_radius, confirmed_planets.equilibrium_temperature).filter(confirmed_planets.distance < 100).all()
+    close_planet_data = session.query(confirmed_planets.planet_name, confirmed_planets.distance, confirmed_planets.planet_mass, confirmed_planets.planet_radius, confirmed_planets.equilibrium_temperature).filter(confirmed_planets.distance < 200).all()
 
     close_planet_df = pd.DataFrame(close_planet_data)
     close_planet_df.columns = ['Planet Name', 'Distance from Earth', 'Planet Mass', 'Planet Radius', 'Equilibrium Temperature']
@@ -59,9 +59,6 @@ def starAPI():
     close_star_json=close_star_df.to_json(orient='columns', index='Star Name')
 
     return close_star_json
-
-
-
 
 #####################################################################################################################
 # query strings for later use once we find out how to work this thing
