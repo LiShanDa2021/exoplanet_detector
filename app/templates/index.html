@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Detection</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/static/images/Background.jpg');
+            background-size: cover;
+            background-color: black;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="bg-dark" class= col-md-12>
+            <h1 style="color:white"; style= "text-align:left"><em>Exoplanet Detection</em></h1>;
+            <p style="color:white"><em>Can Exoplanet detection be automated with machine learning?</em></p>
+            <p></p>
+            <a href="aux-pages/stars/star-systems.html">Star Systems Page</a>
+            <p></p>
+            <a href="aux-pages/known-exoplanets/known-exoplanets.html">Known Exoplanets</a>
+          </div>
+        </div>
+        <p></p>
+        <div class="row">
+            <p style="color:darkgray"><em>The exoplanet of the day is: {{input_from_python}}</em></p>
+            <p></p>
+        </div>
+        <div id="plot"></div>
+        <p style="color:white">Choose a Dataset to View Charts</p>
+                <select id="dropdownMenu">
+                <option value="Planets">Planets</option>
+                <option value="Stars">Stars</option>
+                </select>
+    </div>
+    <script src="static/js/script.js"></script>
+</body>
+</html>
+
