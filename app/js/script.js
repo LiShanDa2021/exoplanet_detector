@@ -1,12 +1,9 @@
 console.log('let us see if this works this time')
 
-//console.log(closePlanetData['Planet Name']);
-
-// x: closePlanetData['Distance From Earth'],
-// y: closePlanetData['Planet Radius'],
 
 function init() {
 const url = '/api/close_planet_data'
+
 d3.json(url).then(function(closePlanetData){
 
 console.log(closePlanetData)
