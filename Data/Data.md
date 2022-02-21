@@ -10,3 +10,5 @@ After finding some workable datasets, we created tables in pgAdmin and linked th
 To connect our scripts to AWS, we used sqlAlchemy
 
 (Data\ERD.png)
+
+[Back](README.md)
