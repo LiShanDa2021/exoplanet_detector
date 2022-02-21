@@ -5,10 +5,10 @@ After finding some workable datasets, we created tables in pgAdmin and linked th
 -(Data\Confirmed_Planets_Table.sql)
 -(Data\false_planets.sql)
 -(Data\Orbital_Radius.sql)
--(Data\Add_Orbit_radius.sql)
+![Add_Orbit_radius.sql](https://github.com/LiShanDa2021/exoplanet_detector/blob/main/Data/Add_Orbit_radius.sql)
 
 To connect our scripts to AWS, we used sqlAlchemy
 
-(Data\ERD.png)
+![pic1](https://github.com/LiShanDa2021/exoplanet_detector/blob/main/Data/ERD.png)
 
-[Back](README.md)
+[Back](https://github.com/LiShanDa2021/exoplanet_detector/blob/main/README.md)
