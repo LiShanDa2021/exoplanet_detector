@@ -9,7 +9,7 @@ After finding some workable datasets, we created tables in pgAdmin and linked th
 
 To connect our scripts to AWS, we used sqlAlchemy
 
-(https://github.com/LiShanDa2021/exoplanet_detector/blob/main/Data/ERD.png)
+![pic1](https://github.com/LiShanDa2021/exoplanet_detector/blob/main/Data/ERD.png)
 
 [Back](https://github.com/LiShanDa2021/exoplanet_detector#readme)
 
