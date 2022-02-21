@@ -20,3 +20,5 @@ CREATE TABLE false_planets (
 	Primary Key (KOI_Name),
 	Unique (KOI_Name)
 )
+
+[Back](https://github.com/LiShanDa2021/exoplanet_detector/blob/main/Data/Data.md)

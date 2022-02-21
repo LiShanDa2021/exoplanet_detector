@@ -9,7 +9,7 @@ We chose this topic because we each like and enjoy the scifi genre and we all gr
 
 ### Data:
 
-[Data Information](Data\Data)
+[Data Information](https://github.com/LiShanDa2021/exoplanet_detector/blob/main/Data/Data.md)
 
 Our data comes from the NASA Keppler Space Telescope dataset from Exoplanet Archive at Cal Tech. Data starts in CSV format with 49 features and 9,564 rows. Includes information about the star the object is orbiting, statistics of potential exoplanets (i.e radius, orbital period, etc.)
 
