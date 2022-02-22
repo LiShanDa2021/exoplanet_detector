@@ -25,8 +25,27 @@ Base.prepare(engine, reflect=True)
 print('Tables: ',Base.classes.keys())
 
 # get planets
-confirmed_planets = Base.classes.confirmed_planets1
-
+session = Session(engine)
+planet_df = pd.read_sql_table('confirmed_planets1', engine)
+orbit_df = pd.read_sql_table('orbital_radius', engine)
+planet_df['Distance from Host Star'] = orbit_df['orbit_semi_major_axis']
+conditions = conditions = [((planet_df['equilibrium_temperature'] >= 200) & (planet_df['equilibrium_temperature'] <= 320)
+               & (planet_df['planet_radius'] >= .5) & (planet_df['planet_radius'] >= 1.6)),
+              ((planet_df['equilibrium_temperature'] >= 200) & (planet_df['equilibrium_temperature'] <= 330)
+               & (planet_df['planet_radius'] > 1.6) & (planet_df['planet_radius'] <= 2.5)),
+              ((planet_df['equilibrium_temperature'] < 200) | (planet_df['equilibrium_temperature'] > 330)
+               | (planet_df['planet_radius'] < .5) | (planet_df['planet_radius'] > 2.5))]
+values = [2,1,0]
+planet_df['Habitability'] = np.select(conditions, values)
+planet_df = planet_df.drop(columns=['koi_name', 'exoplanet_archive_disposition', 'orbital_period',
+       'transit_epoch', 'impact_parameter', 'transit_duration',
+       'transit_depth', 'planetary_radius', 'insolation_flux',
+       'transit_signal_to_noise', 'tce_planet_number',
+       'stellar_surface_gravity', 'ra', 'decimal_degrees', 'kepler_band'], axis=1)
+print(planet_df.columns)
+planet_df.columns = ['Planet Name', 'Planet Mass', 'Planet Radius', 'Distance from Earth', 'Star Name', 'Equilibrium Temperature', 'Stellar Temperature', 'Stellar Radius', 'Distance from Host Star', 'Habitability']
+planet_df.set_index('Planet Name')
+close_planet_df = planet_df.loc[planet_df['Distance from Earth'] <= 200]
 
 # create instance of Flask app
 app = Flask(__name__)
@@ -38,29 +57,20 @@ def test_page_view():
 
 @app.route('/api/close_planet_data')
 def planetAPI():
-    session = Session(engine)
-    close_planet_data = session.query(confirmed_planets.planet_name, confirmed_planets.distance, confirmed_planets.planet_mass, confirmed_planets.planet_radius, confirmed_planets.equilibrium_temperature).filter(confirmed_planets.distance < 100).all()
-
-    close_planet_df = pd.DataFrame(close_planet_data)
-    close_planet_df.columns = ['Planet Name', 'Distance from Earth', 'Planet Mass', 'Planet Radius', 'Equilibrium Temperature']
-    close_planet_df.set_index('Planet Name')
     close_planet_json=close_planet_df.to_json(orient='columns', index='Planet Name')
 
     return close_planet_json
 
-@app.route('/api/close_star_data')
-def starAPI():
-    session = Session(engine)
-    close_star_data = session.query(confirmed_planets.host_name, confirmed_planets.distance, confirmed_planets.stellar_radius, confirmed_planets.stellar_effective_temperature).filter(confirmed_planets.distance < 100).all()
-
-    close_star_df = pd.DataFrame(close_star_data)
-    close_star_df.columns = ['Star Name', 'Distance from Earth', 'Stellar Radius', 'Stellar Temperature']
-    close_star_df.set_index('Star Name')
-    close_star_json=close_star_df.to_json(orient='columns', index='Star Name')
-
-    return close_star_json
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
+
+# filtering
+#
+#close_planet_df = orbit_df.merge(close_planet_df, how="right")
+#print(close_planet_df.columns)
+#'Distance from Host Star"
 
 
 #####################################################################################################################
@@ -86,7 +96,6 @@ def starAPI():
 # functions that get stuff
 # get data for plot a
 # get data for plot b
-
 # filter data in pandas before passing on
 # instead of doing dumb sql request,
 # do smart query
@@ -97,21 +106,22 @@ def starAPI():
 
 # module 9 day 2 activities activity 8
 
-if __name__ == "__main__":
-    app.run(debug=True)
-
-
-
-
-
-
-
 # #load planet data
 # planets_df = pd.read_sql_table('confirmed_planets1', engine)
 # planets_json = planets_df.to_json()
-
 # close_planets_df = planets_df.loc[planets_df['distance'] <= 200]
 # close_planets_json = close_planets_df.to_json()
-
 # # sample input from python for test page
 # input_from_python = (planets_df['planet_name'][random.randrange(0, 2620, 1)])
+
+# @app.route('/api/close_star_data')
+# def starAPI():
+#     session = Session(engine)
+#     close_star_data = session.query(confirmed_planets.host_name, confirmed_planets.distance, confirmed_planets.stellar_radius, confirmed_planets.stellar_effective_temperature).filter(confirmed_planets.distance < 100).all()
+
+#     close_star_df = pd.DataFrame(close_star_data)
+#     close_star_df.columns = ['Star Name', 'Distance from Earth', 'Stellar Radius', 'Stellar Temperature']
+#     close_star_df.set_index('Star Name')
+#     close_star_json=close_star_df.to_json(orient='columns', index='Star Name')
+
+#     return close_star_json

@@ -14,8 +14,6 @@
             background-color: black;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -31,16 +29,18 @@
         </div>
         <p></p>
         <div class="row">
-            <p style="color:darkgray"><em>The exoplanet of the day is: {{input_from_python}}</em></p>
-            <p></p>
+        
         </div>
-        <div id="plot"></div>
+        
         <p style="color:white">Choose a Dataset to View Charts</p>
                 <select id="dropdownMenu">
                 <option value="Planets">Planets</option>
                 <option value="Stars">Stars</option>
                 </select>
+        <div id="plot"></div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="static/js/script.js"></script>
 </body>
 </html>
