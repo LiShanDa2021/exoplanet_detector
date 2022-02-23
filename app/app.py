@@ -29,6 +29,10 @@ session = Session(engine)
 planet_df = pd.read_sql_table('confirmed_planets1', engine)
 orbit_df = pd.read_sql_table('orbital_radius', engine)
 planet_df['Distance from Host Star'] = orbit_df['orbit_semi_major_axis']
+z = planet_df['host_name'].value_counts()
+z1 = z.to_dict()
+planet_df['Number of Planets in System'] = planet_df['host_name'].map(z1)
+planet_df
 conditions = conditions = [((planet_df['equilibrium_temperature'] >= 200) & (planet_df['equilibrium_temperature'] <= 320)
                & (planet_df['planet_radius'] >= .5) & (planet_df['planet_radius'] >= 1.6)),
               ((planet_df['equilibrium_temperature'] >= 200) & (planet_df['equilibrium_temperature'] <= 330)
@@ -43,7 +47,7 @@ planet_df = planet_df.drop(columns=['koi_name', 'exoplanet_archive_disposition',
        'transit_signal_to_noise', 'tce_planet_number',
        'stellar_surface_gravity', 'ra', 'decimal_degrees', 'kepler_band'], axis=1)
 print(planet_df.columns)
-planet_df.columns = ['Planet Name', 'Planet Mass', 'Planet Radius', 'Distance from Earth', 'Star Name', 'Equilibrium Temperature', 'Stellar Temperature', 'Stellar Radius', 'Distance from Host Star', 'Habitability']
+planet_df.columns = ['Planet Name', 'Planet Mass', 'Planet Radius', 'Distance from Earth', 'Star Name', 'Equilibrium Temperature', 'Stellar Temperature', 'Stellar Radius', 'Distance from Host Star', 'Number of Planets in System', 'Habitability']
 planet_df.set_index('Planet Name')
 close_planet_df = planet_df.loc[planet_df['Distance from Earth'] <= 200]
 
@@ -55,6 +59,14 @@ app = Flask(__name__)
 def test_page_view():
     return render_template("index.html")
 
+@app.route('/machine-learning')
+def machine_learning():
+    return render_template("machine-learning.html")
+
+# @app.route('/aux-pages/clustering/')
+# def clustering():
+#     return render_template("clustering.html")
+
 @app.route('/api/close_planet_data')
 def planetAPI():
     close_planet_json=close_planet_df.to_json(orient='columns', index='Planet Name')
@@ -63,8 +75,6 @@ def planetAPI():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
 
 # filtering
 #
