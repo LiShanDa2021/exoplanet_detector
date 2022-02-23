@@ -1,0 +1,1 @@
+database_url = 'postgresql://Brute_Force:daisy_mozart_chorizo@exoplanets1.c8rvp46kd4vt.us-east-1.rds.amazonaws.com/confirmed_planets1'
