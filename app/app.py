@@ -14,7 +14,7 @@ from flask import Response
 import pandas as pd
 import random
 
-engine = sqlalchemy.create_engine(database_url)
+engine = create_engine(database_url)
 connection = engine.connect()
 
 # Declare a Base using `automap_base()`
