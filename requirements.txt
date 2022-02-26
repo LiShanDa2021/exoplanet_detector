@@ -1,17 +1,18 @@
 certifi==2020.6.20
 click==8.0.3
-Flask @ file:///tmp/build/80754af9/flask_1634118196080/work
-Flask-SQLAlchemy @ file:///tmp/build/80754af9/flask-sqlalchemy_1616180561581/work
+Flask==2.02
+Flask-SQLAlchemy==2.5.1
 greenlet==1.1.2
-itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
-Jinja2 @ file:///tmp/build/80754af9/jinja2_1635780242639/work
-MarkupSafe @ file:///Users/builder/ci_310/markupsafe_1642534112998/work
+gunicorn==20.1.0
+itsdangerous==2.1.0
+Jinja2==3.0.3
+MarkupSafe==2.1.0
 numpy==1.22.2
 pandas==1.4.1
-psycopg2 @ file:///Users/builder/ci_310/psycopg2_1642535040511/work
+psycopg2==2.8.6
 python-dateutil==2.8.2
 pytz==2021.3
 six==1.16.0
-SQLAlchemy @ file:///Users/builder/ci_310/sqlalchemy_1642537691316/work
+SQLAlchemy==1.3.23
 SQLAlchemy == 1.3.23
-Werkzeug @ file:///opt/conda/conda-bld/werkzeug_1645628268370/work
+Werkzeug==2.0.3
