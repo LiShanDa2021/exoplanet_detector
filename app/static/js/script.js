@@ -58,8 +58,8 @@ trace = [{
     plot_bgcolor:"#FFF3",
     paper_bgcolor:"#FFF3",
     title: {text:"Kepler Confirmed Planets", font: {family: 'Arial', size: 24, color: "white"}},
-    xaxis: {title: {text: "Distance from Earth (Light Years)", font: {family: 'Arial', size: 14, color: 'white'}, showgrid:false, zerolinecolor:"white", tickcolor: "white"}},
-    yaxis: {title: {text: "Distance from Host Star (Astronomical Units)", font: {family: 'Arial', size: 14, color: 'white'}, showgrid:false, zerolinecolor:"white", tickcolor: "white"}},
+    xaxis: {title: {text: "Distance from Earth (Light Years)", font: {family: 'Arial', size: 14, color: 'white'}, showGrid:false, zeroLineColor:"white", tickColor: "white"}},
+    yaxis: {title: {text: "Distance from Host Star (Astronomical Units)", font: {family: 'Arial', size: 14, color: 'white'}, showGrid:false, zeroLineColor:"white", tickColor: "white"}},
 }
 
   Plotly.newPlot("plot", trace, layout);
