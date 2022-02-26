@@ -5,7 +5,7 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, inspect, MetaData, Table
-
+from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask import render_template, url_for, jsonify
 from flask import request
@@ -53,6 +53,7 @@ close_planet_df = planet_df.loc[planet_df['Distance from Earth'] <= 200]
 
 # create instance of Flask app
 app = Flask(__name__)
+db=SQLAlchemy(app)
 
 # here!! transfer
 @app.route('/')
