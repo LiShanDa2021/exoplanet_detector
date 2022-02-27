@@ -12,69 +12,151 @@
             background-image: url('/static/images/Background.jpg');
             background-size: cover;
             background-color: black;
-            background-blend-mode: darken;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="row">
+        
           <div style="background:transparent !important" class="col-md-12 jumbotron text-center">
             <h1 style="color:white"; style= "text-align:center">Exoplanet Detection:</h1>
             <p style="color:white"><em>an exploration of NASA's Kepler planet-finding telescope dataset</em></p>
             <p style="color:white">
+              <h4 style="color:white">
               <a href="/" style="color:lightblue"><b>Project and Data Overview</b></a>
                 |
                 <b style="color:yellow">Exoplanet Detection with Machine Learning</b>
                 |
-                <a href="/clustering.html" style="color:lightblue"><b>Planet Clustering</b></a>
+                <a href="/clustering" style="color:lightblue"><b>Planet Clustering</b></a>
+                |
+                <a href="/summary" style="color:lightblue"><b>Summary</b></a>
+            </h4>
             </p>
-        </div>
-        <div class="row">
-            <h5 style="color:white">Here is Kyle's machine learning page.</h5>
-        </div>
-
-        <div class="row">
-
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-2">
-              <div class="well">
-                <h5>Test Subject ID No.:</h5>
-                <!-- <select id="selDataset"></select> -->
-                <select id="selDataset" onchange="optionChanged(this.value)"></select>
-              </div>
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Star Info</h3>
-                </div>
-                <div id="sample-metadata" class="panel-body"></div>
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div id="bar"></div>
-            </div>
-            <div class="col-md-5">
-              <div id="gauge"></div>
-            </div>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div id="bubble"></div>
-            </div>
-          </div>
+        
+      
+      <div class="row">
+      <h3 style="color:orange">Machine Learning</h3>
+      </div>
+
+
+
+      <div class="row">
+        <h3 style="color:orange">Data Processing:</h3>
+        <h5 style="color:white">
+        The machine learning process started with a table of 49 columns and 9,564 rows. To reduce some of 
+        the clutter, every column that was considered an upper or lower constraint of a constraint already 
+        displayed in the table was removed. Then we removed all the false_positive_flags so as to not give 
+        our machine learning module a cheat sheet. Beyond that we just removed some columns with skewed 
+        data(thousands of 1’s and just hundreds of 0’s) and ended up working with 17 columns when all was 
+        said and done. Then to further condense our data we removed all the candidate transit events from 
+        the exoplanet_archive_disposition because we couldn’t tell how well the machine learning module was 
+        at predicting what are planets if we weren’t sure ourselves. That along with removing any NA’s 
+        resulting in our final 7247 rows and 17 column table.
+        </h5>
+      </div>
+
+      <div class="row">
+        <h3 style="color:orange">Machine Learning Process:</h3>
+        <h5 style="color:white">
+          we chose to do a neural network for our machine learning model because that seemed to fit the 
+          best with a large collection of data. We also believed that if NASA did this themselves, 
+          this is the model they would have chosen too. From there we split the exoplanet_archive_disposition 
+          into 1’s and 0’s and ended up with a good collection of both(2,665 confirmed and 4,582 false positives). 
+          The model then splits the data up into train,validate,test data with an 80,10,10 split respectively. 
+          Then we ran the model through our extensively generated hidden layers and epochs based on charts and 
+          data we ran while testing to receive the best classification report we could. 
+        </h5>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <p></p>
+          <h4 style="color:yellow">Precision-Recall Curve:</h4>
+          <h5 style="color:white">
+          The precision-recall curve we made shows how the precision and recall of our data is related. 
+          There is a large area under the curve which shows that the model is predicting values in a 
+          skilled manner. For this project, recall is the most important aspect and we are pleased 
+          with how this curve looks.
+          </h5>
         </div>
+        <div class="col-md-6">
+          <h4 style="color:yellow">Confusion:</h4>
+          <h5 style="color:white">
+            With 643/725 of the transit events being predicted correctly, this leaves us with an 88.6% accuracy. 
+            This gives us a pretty accurate model for predicting if a transit event is a planet or not, but not 
+            accurate enough to use it as the sole predictor.
+          </h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="/static/images/Precision-Recall curve.png" class="center" width="391" height="203">
+        </div>
+        <div class="col-md-6">
+          <img src="/static/images/Confusion_Matrix.png" class="center" width="391" height="203">
+        </div>
+      </div>
+
+
+
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <div class="row">
+        <div class="col-md-6">
+          <h4 style="color:yellow">Classification Report:</h4>
+          <h5 style="color:white">
+            The classification report shows that precision for false positives is almost .10 more than 
+            confirmed transit events.This seems to match with the data since there are more false positives 
+            than confirmed planets in the data for the model to train on. But all in all, the average for 
+            this model seems to fit at about 88 percent for both precision and recall. 
+          </h5>
+        </div>
+        <div class="col-md-6">
+          <img src="/static/images/Classification_report.png">
+        </div>
+      </div>
+      
+
+
 
         
-    
+    </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
       <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
       <script src="stars.js"></script>
       <script src="star-charts.js"></script>
 
-
 </body>
 </html>
 
+<!--
+<div class="row">
+  <div class="col-md-2">
+    <div class="well">
+      <h5>Test Subject ID No.:</h5>
+      comment out <select id="selDataset"></select> comment out
+      <select id="selDataset" onchange="optionChanged(this.value)"></select>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Star Info</h3>
+      </div>
+      <div id="sample-metadata" class="panel-body"></div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div id="bar"></div>
+  </div>
+  <div class="col-md-5">
+    <div id="gauge"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div id="bubble"></div>
+  </div>
+</div>
+</div> -->

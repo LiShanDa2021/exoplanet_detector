@@ -14,7 +14,12 @@ d3.json(url).then(function(closePlanetData){
 //map?
 //closePlanetData = closePlanetData.filter(element => element.values(closePlanetData['Distance from Earth']) < 100);
 //const arr1 = data.filter(d => d.age > 37);
-console.log(Object.values(closePlanetData['Equilibrium Temperature']))
+console.log(closePlanetData);
+planetNamesArray=(Object.values(closePlanetData['Planet Name']));
+//myPlanet = closePlanetData;
+//console.log(myPlanet)
+
+
 
 function planetColorScale(c) {
   if (c < 100) {return 'white';}
@@ -62,7 +67,37 @@ trace = [{
     yaxis: {title: {text: "Distance from Host Star (Astronomical Units)", font: {family: 'Arial', size: 14, color: 'white'}, showGrid:false, zeroLineColor:"white", tickColor: "white"}},
 }
 
+var myPlanet = 1
+var habitability = myPlanet
+
+//Create the trace for the gauge chart.
+var gaugeData = [{
+  value: habitability,
+  type: "indicator",
+  mode: "gauge+number",
+  title: {text: "Habitability"},
+  gauge: {
+    axis: { range: [null, 2] },
+    steps: [
+      { range: [0,.65], color: "darkbrown", text: "Uninhabitable"},
+      { range: [1,1.35], color: "yellow", text: "Possibly inhabitable (optimistic estimate)"},
+      { range: [1.3, 2], color: "green", text: "Possibly inhabitable (conservative estimate)"},
+    ],
+    bar: { color: "green" },
+    }
+}];
+  
+//5. Create the layout for the gauge chart.
+var gaugeLayout = { 
+  width: 400, 
+  height: 350, 
+  margin: { t: 0, b: 0 },
+  paper_bgcolor: "transparent",
+  font: {'color': "white"}
+};
+
   Plotly.newPlot("plot", trace, layout);
+  Plotly.newPlot("gauge", gaugeData, gaugeLayout)
 
   d3.selectAll("#dropdownMenu").on("change", updatePlotly);
   function updatePlotly() {
@@ -114,7 +149,7 @@ trace = [{
 
     Plotly.update("plot", trace, layout);
   };
-  d3.selectAll("#dropdownMenu").on("change", updatePlotly);
+  //d3.selectAll("#dropdownMenu").on("change", updatePlotly);
   }
 )};
 init();

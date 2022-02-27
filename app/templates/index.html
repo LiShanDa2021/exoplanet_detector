@@ -13,35 +13,98 @@
             background-image: url('/static/images/Background.jpg');
             background-size: cover;
             background-color: black;
-            background-blend-mode: darken;
+            background-blend-mode: normal;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="row">
           <div class="bg-dark" class= col-md-12>
             <div style="background:transparent !important" class="col-md-12 jumbotron text-center">
             <h1 style="color:white"; style= "text-align:center">Exoplanet Detection:</h1>
             <p style="color:white"><em>an exploration of NASA's Kepler planet-finding telescope dataset</em></p>
             <p style="color:white">
+                <h4 style="color:white">
                 <b style="color:yellow">Project and Data Overview</b>
                 |
                 <a href="/machine-learning" style="color:lightblue"><b>Exoplanet Detection with Machine Learning</b></a>
                 |
-                <a href="/clustering.html" style="color:lightblue"><b>Planet Clustering</b></a>
+                <a href="/clustering" style="color:lightblue"><b>Planet Clustering</b></a>
+                |
+                <a href="/summary" style="color:lightblue"><b>Summary</b></a>
+                </h4>
             </p>
             </div>
           </div>
+        <div class="row">
+        <p></p>
+        <h3 style="color:orange">Project Overview</h3>
+        <h5 style="color:white">
+        NASA's Kepler planet finding telescope has found thousands upon thousands of objects of interest 
+        by detecting slight dimming in far away stars. Sometimes such dimming indicated the transit of an 
+        exoplanet -- a world beyond our solar system -- in front of its host star. Other times it was nothing 
+        more than noise in the telescope's signal. Confirming the existence of an exoplanet is a painstaking process 
+        -- but could it be automated with machine learning? Doing so would give NASA's researchers more time and 
+        resources to study these far off worlds.
+
+        We at Team_Brute_Force have been exploring NASA's Kepler dataset in order to construct a machine learning
+        algorithm that could tell whether a Kepler Object of Interest (KOI) was more likely to be a true planet
+        or a false positive based on the many columns of data returned by Kepler. We did this by separating the KOI
+        data into two groups -- confirmed planets and false positives -- and then training our algorithm with a neural
+        network to identify patterns that would distinguish the two groups. Our results, as you will see on the 
+        <a href="/machine-learning" style="color:lightblue">'Exoplanet Detection with Machine Learning'</a>
+        were impressive but it remains to be seen if they are useful.
+
+        Our secondary mission was to evaluate the thousands of confirmed planets for habitability. You can see 
+        the results of this analysis in the 'Data Exploration' section below.
+        </p>
+        </h5>
         </div>
         <div class="row">
-        <p style="color:white">Choose a Dataset to View Charts</p>
-                <select id="dropdownMenu">
+        <h3 style="color:orange">Data Exploration</h3>
+        <p style="color:white">Choose a Dataset to View Charts: 
+                <select id="dropdownMenu" style="color:black">
                 <option value="Planets">Planets</option>
                 <option value="Stars">Stars</option>
                 </select>
-        <div id="plot"></div>
+        </p>
         </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div id="plot"></div>
+            </div>
+            <div class="col-md-4">
+                <div id="gauge"></div>
+            </div>
+        </div>
+        
+        <p>
+        <div class="row">
+        <h5 style="color:white">
+        The above chart depicts all the Kepler confirmed exoplanets (when the planets dataset is toggled)
+        and all their host stars (when the star dataset is toggled) within 200 light years. The colors
+        of the planets indicate temperature with white being the coldest at less than 100 degrees kelvin
+        and red being the hottest at over 500 degrees kelvin. Blue (between 200 and 250 kelvin) and green 
+        (between 250 and 300 kelvin) indicate surface temperatures not hostile to life. Our Earth which averages
+        288 degrees kelvin would appear as green. Of course, temperature is not the only factor in habitability.
+        Click on a planet to view it's habitability index using criteria from the <a href="https://phl.upr.edu/home">
+        habitable exoplanets catalog</a> at the University of Puerto Rico. As you can see from the sample, the 
+        vast majority of those nearby exoplanets are too hot to be habitable -- most likely because
+        they orbit very close to their host stars as is indicated by their position on the y-axis. It may be
+        that planets closer to their stars are easier to detect since they would transit more often and thus grant us
+        more chances to observe them. For reference, Neptune travels around the sun once every 165 Earth years while 
+        mercury achieves the same feat nearly 4 times an Earth year.
+        </p>
+        <p>
+        Toggling to the star dataset, you can see that the appearance of the stars matches their actual appearance:
+        the smaller, cooler red dwarves appear as smaller red markers while the larger, hotter main class stars appear
+        as larger, orange and yellow markers. Note that there are no giant stars in this subset of the data. This may be 
+        because planet transits are harder to observe in larger, brighter stars.
+        </h5>
+        </p>
+        </div>
+        </div>
+
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
@@ -50,3 +113,7 @@
 </body>
 </html>
 
+
+Even though NASA's Kepler mission has ended, there are several active planet-finding missions using similar technology
+including the Transiting Exoplanet Survey Satellite. Our machine learning algorithms could potentially be 
+adapted for these ongoing missions.

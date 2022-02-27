@@ -49,6 +49,7 @@ planet_df = planet_df.drop(columns=['koi_name', 'exoplanet_archive_disposition',
 print(planet_df.columns)
 planet_df.columns = ['Planet Name', 'Planet Mass', 'Planet Radius', 'Distance from Earth', 'Star Name', 'Equilibrium Temperature', 'Stellar Temperature', 'Stellar Radius', 'Distance from Host Star', 'Number of Planets in System', 'Habitability']
 planet_df.set_index('Planet Name')
+close_planet_df = planet_df
 close_planet_df = planet_df.loc[planet_df['Distance from Earth'] <= 200]
 
 # create instance of Flask app
@@ -67,6 +68,10 @@ def machine_learning():
 # @app.route('/aux-pages/clustering/')
 # def clustering():
 #     return render_template("clustering.html")
+
+@app.route('/summary')
+def summary():
+    return render_template("summary.html")
 
 @app.route('/api/close_planet_data')
 def planetAPI():
