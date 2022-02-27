@@ -20,11 +20,6 @@ Given our dataset, can we predict whether or not the observed event represenets 
 Can we automate planet detection?
 
 
-## GitHub:
-
-Communication plan: We will communicate on slack and meet via google or teams. Check in on Sundays and Tuesdays and as needed. 
-
-
 ## Machine Learning:
 
 ### Preliminary data and Feature Selection: 
