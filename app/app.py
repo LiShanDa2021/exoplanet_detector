@@ -34,7 +34,7 @@ z1 = z.to_dict()
 planet_df['Number of Planets in System'] = planet_df['host_name'].map(z1)
 planet_df
 conditions = conditions = [((planet_df['equilibrium_temperature'] >= 200) & (planet_df['equilibrium_temperature'] <= 320)
-               & (planet_df['planet_radius'] >= .5) & (planet_df['planet_radius'] >= 1.6)),
+               & (planet_df['planet_radius'] >= .5) & (planet_df['planet_radius'] <= 1.6)),
               ((planet_df['equilibrium_temperature'] >= 200) & (planet_df['equilibrium_temperature'] <= 330)
                & (planet_df['planet_radius'] > 1.6) & (planet_df['planet_radius'] <= 2.5)),
               ((planet_df['equilibrium_temperature'] < 200) | (planet_df['equilibrium_temperature'] > 330)
