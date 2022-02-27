@@ -49,7 +49,7 @@ Using HTML and JS to create an interactive dashboard to show the relative sizes 
     +Python (pandas, tensorflow, keras, sklearn)
     +HTML 
     +JavaScript
-    +MongoDB
+    +Flask
     +GitHub
 
 
