@@ -12,14 +12,53 @@ d3.json(url).then(function(closePlanetData){
 //d3 selector
 //for loop?
 //map?
-//closePlanetData = closePlanetData.filter(element => element.values(closePlanetData['Distance from Earth']) < 100);
-//const arr1 = data.filter(d => d.age > 37);
 console.log(closePlanetData);
-planetNamesArray=(Object.values(closePlanetData['Planet Name']));
-//myPlanet = closePlanetData;
-//console.log(myPlanet)
+console.log(closePlanetData['Distance from Earth'][29])
 
+planetArray=(Object.keys(closePlanetData['Planet Name']));
+// planetNamesArray=(Object.values(closePlanetData['Planet Name']));
+// planetTemps = (Object.values(closePlanetData['Equilibrium Temperature']));
+// starNamesArray=(Object.values(closePlanetData['Star Name']));
+// starTemps = (Object.values(closePlanetData['Stellar Temperature']));
+// planetSizeArray = Object.values(closePlanetData['Planet Radius']);
+// starSizeArray = Object.values(closePlanetData['Stellar Radius'])
+// distanceFromEarthArray = Object.values(closePlanetData['Distance from Earth'])
+// distanceFromStarArray = Object.values(closePlanetData['Distance from Host Star'])
 
+initialMaxDistance = 200
+maxDistance = initialMaxDistance
+
+closePlanetArray = planetArray.filter(planet => closePlanetData['Distance from Earth'][planet] < maxDistance);
+closePlanetNames = []; closePlanetTemps = []; closeStarNames = []; closeStarTemps = [];
+planetSize = []; starSize = []; distanceFromEarth = []; distanceFromStar = []; habitability = []
+
+function limitDistance(x) {
+for (let i = 0; i < planetArray.length; i++) {
+  if (closePlanetData['Distance from Earth'][planetArray[i]] < maxDistance) {
+    closePlanetNames.push(closePlanetData['Planet Name'][planetArray[i]]);
+    closePlanetTemps.push(closePlanetData['Equilibrium Temperature'][planetArray[i]]);
+    closeStarNames.push(closePlanetData['Star Name'][planetArray[i]]);
+    closeStarTemps.push(closePlanetData['Stellar Temperature'][planetArray[i]]);
+    planetSize.push(closePlanetData['Planet Radius'][planetArray[i]]);
+    starSize.push(closePlanetData['Stellar Radius'][planetArray[i]]);
+    distanceFromEarth.push(closePlanetData['Distance from Earth'][planetArray[i]]);
+    distanceFromStar.push(closePlanetData['Distance from Host Star'][planetArray[i]]);
+    habitability.push(closePlanetData['Habitability'][planetArray[i]])
+  }
+}
+};
+
+limitDistance(maxDistance)
+
+console.log("planet index", closePlanetArray);
+console.log("planet names", closePlanetNames);
+console.log("planet temps", closePlanetTemps);
+console.log("star names", closeStarNames);
+console.log("habitability", habitability);
+
+var myPlanet = closePlanetArray[4];
+console.log(myPlanet)
+var habitability = closePlanetData['Habitability'][myPlanet];
 
 function planetColorScale(c) {
   if (c < 100) {return 'white';}
@@ -30,7 +69,6 @@ function planetColorScale(c) {
   else if (c < 500) {return 'orange';}
   else {return 'red';}
 };
-var planetColor = Object.values(closePlanetData['Equilibrium Temperature']).map(x=>planetColorScale(x));
 
 function starColorScale(c) {
   if (c < 2800) {return 'brown';} 
@@ -40,35 +78,47 @@ function starColorScale(c) {
   else if (c < 25000) {return 'white';}
   else {return 'blue';}
 };
-var starColor = Object.values(closePlanetData['Stellar Temperature']).map(x=>starColorScale(x));
 
-var planetSize = Object.values(closePlanetData['Planet Radius']);
+// scale sizes and colors
+var planetColor = closePlanetTemps.map(x=>planetColorScale(x));
+var starColor = closeStarTemps.map(x=>starColorScale(x));
 var planetSizeScaled = planetSize.map(x=>x*10);
-    
-var starSize = Object.values(closePlanetData['Stellar Radius']);
 var starSizeScaled = starSize.map(x=>x*100);
 
-var xData; var yData; var text; var chartTitle; var xtitle; var ytitle;
-
+//var xData; var yData; var text; var chartTitle; var xtitle; var ytitle;
 trace = [{
-  x: Object.values(closePlanetData['Distance from Earth']),
-  y: Object.values(closePlanetData['Distance from Host Star']),
+  x: distanceFromEarth,
+  y: distanceFromStar,
   mode: 'markers',
   marker: {size: planetSizeScaled, color: planetColor},
-  text: Object.values(closePlanetData['Planet Name']),
+  text: closePlanetNames,
   type: 'scatter',
   }];
 
-  var layout= {
+var layout= {
     plot_bgcolor:"#FFF3",
-    paper_bgcolor:"#FFF3",
+    paper_bgcolor:"transparent",
     title: {text:"Kepler Confirmed Planets", font: {family: 'Arial', size: 24, color: "white"}},
     xaxis: {title: {text: "Distance from Earth (Light Years)", font: {family: 'Arial', size: 14, color: 'white'}, showGrid:false, zeroLineColor:"white", tickColor: "white"}},
     yaxis: {title: {text: "Distance from Host Star (Astronomical Units)", font: {family: 'Arial', size: 14, color: 'white'}, showGrid:false, zeroLineColor:"white", tickColor: "white"}},
 }
 
-var myPlanet = 1
-var habitability = myPlanet
+var starTrace = [{
+  x: distanceFromEarth,
+  y: closeStarTemps,
+  mode: 'markers',
+  type: 'scatter',
+  marker: {size: starSizeScaled, color: starColor},
+  text: closeStarNames,
+}];
+
+var starLayout= {
+  plot_bgcolor:"#FFF3",
+  paper_bgcolor:"transparent",
+  title: {text:"Kepler Stars with Confirmed Planets", font: {family: 'Arial', size: 24, color: "white"}},
+  xaxis: {title: {text: "Distance from Earth (Light Years)", font: {family: 'Arial', size: 14, color: 'white'}, showgrid: false, zerolinecolor:"white", tickcolor: "white"}},
+  yaxis: {title: {text: "Temperature", font: {family: 'Arial', size: 14, color: 'white'}, showGrid: false, zerolinecolor:"white", tickcolor: "white"}},
+}
 
 //Create the trace for the gauge chart.
 var gaugeData = [{
@@ -80,14 +130,15 @@ var gaugeData = [{
     axis: { range: [null, 2] },
     steps: [
       { range: [0,.65], color: "darkbrown", text: "Uninhabitable"},
-      { range: [1,1.35], color: "yellow", text: "Possibly inhabitable (optimistic estimate)"},
-      { range: [1.3, 2], color: "green", text: "Possibly inhabitable (conservative estimate)"},
+      { range: [.65,1.35], color: "yellow", text: "Possibly inhabitable (optimistic estimate)"},
+      { range: [1.35, 2], color: "green", text: "Possibly inhabitable (conservative estimate)"},
     ],
     bar: { color: "green" },
     }
 }];
   
-//5. Create the layout for the gauge chart.
+// Create the layout for the gauge chart.
+
 var gaugeLayout = { 
   width: 400, 
   height: 350, 
@@ -96,60 +147,103 @@ var gaugeLayout = {
   font: {'color': "white"}
 };
 
+// create dynamic pie variables
+
+var pieData = [{
+  values: [10, 39, 2571],
+  labels: ['Habitable (Conservative)', 'Habitable (Optimistic', 'Uninhabitable'],
+  marker: {
+    colors: ["green","yellow","brown"]
+  },
+  type: 'pie',
+}];
+
+var pieLayout = {
+  height: 300,
+  width: 500,
+  paper_bgcolor: "transparent",
+  font: {'color': "white", size:"10"},
+  legend: {
+    x: 1,
+    xanchor: 'top',
+    y: 1
+  }
+};
+
+// Draw the initial plots
   Plotly.newPlot("plot", trace, layout);
-  Plotly.newPlot("gauge", gaugeData, gaugeLayout)
+  Plotly.newPlot("gauge", gaugeData, gaugeLayout);
+  Plotly.newPlot("pie", pieData, pieLayout);
+  Plotly.newPlot("starPlot", starTrace, starLayout);
 
-  d3.selectAll("#dropdownMenu").on("change", updatePlotly);
+  d3.selectAll("#lightYears").on("change", updatePlotly);
+
   function updatePlotly() {
-  const url = '/api/close_planet_data';
+  console.log("that did something")
+  let changedElement = d3.select(this);
+  maxDistance = changedElement.property("value")
+  console.log(maxDistance)
 
-  var dropdownMenu = d3.select("#dropdownMenu");
-  var dataset = dropdownMenu.property("value");
-  
-    if (dataset === 'Stars') {
-      xData = Object.values(closePlanetData['Distance from Earth']);
-      yData = Object.values(closePlanetData['Stellar Temperature']);
-      text = Object.values(closePlanetData['Star Name']);
-      size = starSizeScaled;
-      temp = starColor;
-      chartTitle = "Kepler Stars with Confirmed Planets";
-      xtitle = "Distance from Earth (Light Years)";
-      ytitle = "Number of Exoplanets in System";
-      console.log('You chose stars.');
-    };
+  closePlanetArray = planetArray.filter(planet => closePlanetData['Distance from Earth'][planet] < maxDistance);
+  closePlanetNames = []; closePlanetTemps = []; closeStarNames = []; closeStarTemps = [];
+  planetSize = []; starSize = []; distanceFromEarth = []; distanceFromStar = []; habitability = []
 
-    if (dataset === 'Planets') {
-      xData = Object.values(closePlanetData['Distance from Earth']);
-      yData = Object.values(closePlanetData['Distance from Host Star']);
-      text = Object.values(closePlanetData['Planet Name']);
-      size = planetSizeScaled;
-      temp = planetColor;
-      chartTitle = "Kepler Confirmed Planets";
-      xtitle = "Distance from Earth (Light Years)";
-      ytitle = "Distance from Host Star (Astronomical Units)";
-      console.log('You chose planets.');
-    };
-
-    var trace = {
-      x: [xData],
-      y: [yData],
-      mode: 'markers',
-      type: 'scatter',
-      marker: {size: size, color: temp},
-      text: text,
-    };
-    
-    var layout= {
-      plot_bgcolor:"#FFF3",
-      paper_bgcolor:"#FFF3",
-      title: {text:chartTitle, font: {family: 'Arial', size: 24, color: "white"}},
-      xaxis: {title: {text: xtitle, font: {family: 'Arial', size: 14, color: 'white'}, showgrid: false, zerolinecolor:"white", tickcolor: "white"}},
-      yaxis: {title: {text: ytitle, font: {family: 'Arial', size: 14, color: 'white'}, showgrid: false, zerolinecolor:"white", tickcolor: "white"}},
+  for (let i = 0; i < planetArray.length; i++) {
+    if (closePlanetData['Distance from Earth'][planetArray[i]] < maxDistance) {
+      closePlanetNames.push(closePlanetData['Planet Name'][planetArray[i]]);
+      closePlanetTemps.push(closePlanetData['Equilibrium Temperature'][planetArray[i]]);
+      closeStarNames.push(closePlanetData['Star Name'][planetArray[i]]);
+      closeStarTemps.push(closePlanetData['Stellar Temperature'][planetArray[i]]);
+      planetSize.push(closePlanetData['Planet Radius'][planetArray[i]]);
+      starSize.push(closePlanetData['Stellar Radius'][planetArray[i]]);
+      distanceFromEarth.push(closePlanetData['Distance from Earth'][planetArray[i]]);
+      distanceFromStar.push(closePlanetData['Distance from Host Star'][planetArray[i]]);
+      habitability.push(closePlanetData['Habitability'][planetArray[i]]);
     }
 
-    Plotly.update("plot", trace, layout);
+  planetColor = closePlanetTemps.map(x=>planetColorScale(x));
+  starColor = closeStarTemps.map(x=>starColorScale(x));
+  planetSizeScaled = planetSize.map(x=>x*10);
+  starSizeScaled = starSize.map(x=>x*100);
+
+    var planetTrace = [{
+      x: distanceFromEarth,
+      y: distanceFromStar,
+      mode: 'markers',
+      type: 'scatter',
+      marker: {size: planetSizeScaled, color: planetColor},
+      text: closePlanetNames,
+    }];
+    
+    var planetLayout= {
+      plot_bgcolor:"#FFF3",
+      paper_bgcolor:"#FFF3",
+      title: {text:"Kepler Confirmed Planets", font: {family: 'Arial', size: 24, color: "white"}},
+      xaxis: {title: {text: "Distance from Earth (Light Years)", font: {family: 'Arial', size: 14, color: 'white'}, showgrid: false, zerolinecolor:"white", tickcolor: "white"}},
+      yaxis: {title: {text: "Distance from Host Star (Astronomical Units)", font: {family: 'Arial', size: 14, color: 'white'}, showgrid: false, zerolinecolor:"white", tickcolor: "white"}},
+    }
+
+    var starTrace = [{
+      x: distanceFromEarth,
+      y: closeStarTemps,
+      mode: 'markers',
+      type: 'scatter',
+      marker: {size: starSizeScaled, color: starColor},
+      text: closeStarNames,
+    }];
+    
+    var starLayout= {
+      plot_bgcolor:"#FFF3",
+      paper_bgcolor:"#FFF3",
+      title: {text:"Kepler Stars with Confirmed Planets", font: {family: 'Arial', size: 24, color: "white"}},
+      xaxis: {title: {text: "Distance from Earth (Light Years)", font: {family: 'Arial', size: 14, color: 'white'}, showgrid: false, zerolinecolor:"white", tickcolor: "white"}},
+      yaxis: {title: {text: "Temperature", font: {family: 'Arial', size: 14, color: 'white'}, showgrid: false, zerolinecolor:"white", tickcolor: "white"}},
+    }
+
+    Plotly.update("plot", planetTrace, planetLayout);
+    Plotly.update("starPlot", starTrace, starLayout);
   };
-  //d3.selectAll("#dropdownMenu").on("change", updatePlotly);
-  }
-)};
+ }
+});
+}
 init();
