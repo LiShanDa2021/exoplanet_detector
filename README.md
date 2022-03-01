@@ -3,6 +3,7 @@
 
 ## Presentation:
 ### [Google Slides Presentation](https://docs.google.com/presentation/d/1eaPImFXlAEw8KDVOquqmDu-2rw82H8avftx5OCL4-GQ/edit?usp=sharing)
+### [Heroku Dashboard](https://exoplanet-detector-brute-force.herokuapp.com/)
 
 ### Project Overview: 
 
