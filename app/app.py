@@ -18,16 +18,16 @@ import pandas as pd
 import random
 
 app = Flask(__name__)
-database_url = os.environ.get("DATABASE_URL2", CONFIG["DATABASE_URL2"])
-engine = create_engine(database_url)
-connection = engine.connect()
+# database_url = os.environ.get("DATABASE_URL2", CONFIG["DATABASE_URL2"])
+# engine = create_engine(database_url)
+# connection = engine.connect()
 
-# Declare a Base using `automap_base()`
-Base = automap_base()
-# Use the Base class to reflect the database tables
-Base.prepare(engine, reflect=True)
-# Print all of the classes mapped to the Base
-print('Tables: ',Base.classes.keys())
+# # Declare a Base using `automap_base()`
+# Base = automap_base()
+# # Use the Base class to reflect the database tables
+# Base.prepare(engine, reflect=True)
+# # Print all of the classes mapped to the Base
+# print('Tables: ',Base.classes.keys())
 
 # get planets
 
