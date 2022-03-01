@@ -1,4 +1,3 @@
-
 try:
     from config import CONFIG
 except ImportError:
@@ -18,6 +17,7 @@ from flask import Response
 import pandas as pd
 import random
 
+app = Flask(__name__)
 database_url = os.environ.get("DATABASE_URL2", CONFIG["DATABASE_URL2"])
 engine = create_engine(database_url)
 connection = engine.connect()
@@ -58,7 +58,7 @@ planet_df = planet_df
 #close_planet_df = planet_df.loc[planet_df['Distance from Earth'] <= 200]
 
 # create instance of Flask app
-app = Flask(__name__)
+#app = Flask(__name__)
 db=SQLAlchemy(app)
 
 # here!! transfer
