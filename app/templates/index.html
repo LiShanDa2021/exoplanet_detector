@@ -62,11 +62,10 @@
         </div>
         <div class="row">
         <h3 style="color:orange">Data Exploration</h3>
-        <p style="color:white">Choose a Dataset to View Charts: 
-                <select id="dropdownMenu" style="color:black">
-                <option value="Planets">Planets</option>
-                <option value="Stars">Stars</option>
-                </select>
+        <p style="color:white">
+                <label for="distance">Plot all planets within</label>
+                <input type="number" placeholder="200" style="color:black" id="lightYears"/>
+                light years.
         </p>
         </div>
         <div class="row">
@@ -87,8 +86,7 @@
         and red being the hottest at over 500 degrees kelvin. Blue (between 200 and 250 kelvin) and green 
         (between 250 and 300 kelvin) indicate surface temperatures not hostile to life. Our Earth which averages
         288 degrees kelvin would appear as green. Of course, temperature is not the only factor in habitability.
-        Click on a planet to view it's habitability index using criteria from the <a href="https://phl.upr.edu/home">
-        habitable exoplanets catalog</a> at the University of Puerto Rico. As you can see from the sample, the 
+        Click on a planet to view it's habitability index. As you can see from the sample, the 
         vast majority of those nearby exoplanets are too hot to be habitable -- most likely because
         they orbit very close to their host stars as is indicated by their position on the y-axis. It may be
         that planets closer to their stars are easier to detect since they would transit more often and thus grant us
@@ -96,13 +94,38 @@
         Mercury achieves the same feat nearly 4 times an Earth year.
         </p>
         <p>
-        Toggling to the star dataset, you can see that the appearance of the stars matches their actual appearance:
+        <div class="row">
+            <div class="col-md-6">
+                <div id="pie"></div>
+            </div>
+            <div class="col-md-6">
+            To find out how many planets in the full dataset were habitable, we used Python to create a list of conditions 
+            established by the <a href="https://phl.upr.edu/home" style="color:lightblue">habitable exoplanets catalog</a> at the University of 
+            Puerto Rico and then used numpy's select function to filter our dataframe by those conditions. We were thus 
+            able to assign a habitability score from 0 to 2 to each of the 2,620 confirmed exoplanets in the Kepler dataset. 
+            A habitability score of 0 meant the planet was uninhabitable with an average temperature of less than 200 Kelvin 
+            and a radius of either smaller than half of Earth's radius or larger than 2.5 earth radii. A habitability score of 
+            1 meant that the planet was potentially habitable under optimistic criteria. That is, the planet could be as cool 
+            as 200 Kelvin or as hot as 330 Kelvin with a radius as small as half that of earth's or as large as 2.5 earth radii. 
+            Finally, the planets with a score of 2 meet more conservative criteria for habitability: they have a radius greater 
+            than .5 earth radii and smaller than 1.6 earth radii. As one would expect, the vast majority of Kepler's
+            confirmed exoplanets scored a 0 on habitability. 39 -- or 1.5% -- of the exoplanets met the optimistic criteria for 
+            habitability while only 10 -- or .4% -- met the conservative criteria. You can see these results visualized in
+            the chart on the left.
+            </div>
+        </div>
+        </p>
+        <p>
+        As for the star dataset, you can see that the appearance of the stars matches their actual appearance:
         the smaller, cooler red dwarves appear as smaller red markers while the larger, hotter main class stars appear
         as larger, orange and yellow markers. Note that there are no giant stars in this subset of the data. This may be 
         because planet transits are harder to observe in larger, brighter stars.
         </h5>
         </p>
         <p>
+            <div class="row">
+                <div id="starPlot"></div>
+            </div>
         </p>
         <p>
         <a href="/machine-learning" style="color:lightblue"><b>Next ==> Exoplanet Detection with Machine Learning</b></a>

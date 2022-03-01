@@ -1,6 +1,10 @@
 
-from config import *
+try:
+    from config import CONFIG
+except ImportError:
+    CONFIG = {}
 import numpy as np
+import os
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -14,6 +18,7 @@ from flask import Response
 import pandas as pd
 import random
 
+database_url = os.environ.get("DATABASE_URL2", CONFIG["DATABASE_URL2"])
 engine = create_engine(database_url)
 connection = engine.connect()
 
@@ -49,8 +54,8 @@ planet_df = planet_df.drop(columns=['koi_name', 'exoplanet_archive_disposition',
 print(planet_df.columns)
 planet_df.columns = ['Planet Name', 'Planet Mass', 'Planet Radius', 'Distance from Earth', 'Star Name', 'Equilibrium Temperature', 'Stellar Temperature', 'Stellar Radius', 'Distance from Host Star', 'Number of Planets in System', 'Habitability']
 planet_df.set_index('Planet Name')
-close_planet_df = planet_df
-close_planet_df = planet_df.loc[planet_df['Distance from Earth'] <= 200]
+planet_df = planet_df
+#close_planet_df = planet_df.loc[planet_df['Distance from Earth'] <= 200]
 
 # create instance of Flask app
 app = Flask(__name__)
@@ -65,9 +70,9 @@ def test_page_view():
 def machine_learning():
     return render_template("machine-learning.html")
 
-# @app.route('/aux-pages/clustering/')
-# def clustering():
-#     return render_template("clustering.html")
+@app.route('/clustering')
+def clustering():
+    return render_template("clustering.html")
 
 @app.route('/summary')
 def summary():
@@ -75,7 +80,7 @@ def summary():
 
 @app.route('/api/close_planet_data')
 def planetAPI():
-    close_planet_json=close_planet_df.to_json(orient='columns', index='Planet Name')
+    close_planet_json=planet_df.to_json(orient='columns', index='Planet Name')
 
     return close_planet_json
 
