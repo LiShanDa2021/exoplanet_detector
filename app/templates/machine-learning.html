@@ -48,10 +48,10 @@
         the clutter, every column that was considered an upper or lower constraint of a constraint already 
         displayed in the table was removed. Then we removed all the false_positive_flags so as to not give 
         our machine learning module a cheat sheet. Beyond that we just removed some columns with skewed 
-        data(thousands of 1’s and just hundreds of 0’s) and ended up working with 17 columns when all was 
+        data and ended up working with 17 columns when all was 
         said and done. Then to further condense our data we removed all the candidate transit events from 
         the exoplanet_archive_disposition because we couldn’t tell how well the machine learning module was 
-        at predicting what are planets if we weren’t sure ourselves. That along with removing any NA’s 
+        at predicting what are planets if we weren’t sure ourselves. That along with removing any missing data 
         resulting in our final 7247 rows and 17 column table.
         </h5>
       </div>
@@ -59,13 +59,11 @@
       <div class="row">
         <h3 style="color:orange">Machine Learning Process:</h3>
         <h5 style="color:white">
-          we chose to do a neural network for our machine learning model because that seemed to fit the 
-          best with a large collection of data. We also believed that if NASA did this themselves, 
-          this is the model they would have chosen too. From there we split the exoplanet_archive_disposition 
-          into 1’s and 0’s and ended up with a good collection of both(2,665 confirmed and 4,582 false positives). 
+          we chose to do a neural network for our machine learning model because this family of models has proven effective on a wide variety of large scale datasets. We also wanted to follow in NASA's footsteps as best as we could 
+          and they also choose a deep neural network for their machine learning. From there we split the exoplanet_archive_disposition 
+          into confirmed and false_positive candidate data and ended up with a good collection of both(2,665 confirmed and 4,582 false positives). 
           The model then splits the data up into train,validate,test data with an 80,10,10 split respectively. 
-          Then we ran the model through our extensively generated hidden layers and epochs based on charts and 
-          data we ran while testing to receive the best classification report we could. 
+          We then hyperfit our model on a sweep of architectures and training hyperparameters including 5 hidden layers, up to 60 hidden units per layer, 100 epochs, and 100 iterations, and chose the model with best validation accuracy for our final evaluation on the test partition.
         </h5>
       </div>
       
@@ -76,14 +74,13 @@
           <h5 style="color:white">
           The precision-recall curve we made shows how the precision and recall of our data is related. 
           There is a large area under the curve which shows that the model is predicting values in a 
-          skilled manner. For this project, recall is the most important aspect and we are pleased 
-          with how this curve looks.
+          skilled manner.  For this project, recall is the most important aspect so that we can identity all of the tranist events that aren't planets. As you can see from the graph, a recall of 1.0 means only 0.4 precision. A good threshold for our model would be in the 0.95 recall range seeing as the precision is double that of the 1.0 recall rate and then we have a good mixture of precison and recall with the higher average being on recall.
           </h5>
         </div>
         <div class="col-md-6">
           <h4 style="color:yellow">Confusion:</h4>
           <h5 style="color:white">
-            With 643/725 of the transit events being predicted correctly, this leaves us with an 88.6% accuracy. 
+            With 643/725 of the transit events being predicted correctly, this leaves us with an 88.6% accuracy.
             This gives us a pretty accurate model for predicting if a transit event is a planet or not, but not 
             accurate enough to use it as the sole predictor.
           </h5>

@@ -45,11 +45,13 @@
                 machine learning to automate planet findings? and 2. How many planets in NASA's Kepler dataset are
                 potentially habitable? Here we summarize how we fared in answering these questions.
               <p>
+              </h5>
                 <h4 style="color:yellow">Machine Learning</h4>
                 <h5 style="color:white">
-                The simple answer to whether machine learning can be used to automate planet findings is yes, however, it is way more complex of a question than that. Our machine learning model can predict whether a transit event is a planet up to about 88% accurary or roughly prediciting 641 transit events correctly out of 725. This is a rather remarkable percent accuracy given how random and sporatic transit events can be, but unforuntaly, this is not accurate enough to be applicable to NASA's tranist event analysis. If this was a linear regression problem and most of the incorrectly labeled transit events were around the line, that wouldn't be so bad. However, with a good chunk of the transit events mislabeled, the incorrectly labeled transit event is almost as far away from the line as it can be. This makes this model too unreliable for the classification of transit events. 
+                The simple answer to whether machine learning can be used to automate planet findings is yes, however, it is way more complex of a question than that. Our machine learning model can predict whether a transit event is a planet up to about 88% accurary or roughly prediciting 641 transit events correctly out of 725. This is a rather remarkable percent accuracy given how random and sporatic transit events can be, but unforuntaly, this is not accurate enough to be applicable to NASA's tranist event analysis. Right now NASA has a Machine Learning Model called the Exominer and their recall is 93% with a fixed percision value of 0.99. There model also works the same with the TESS set of exoplanets where as ours is untested on TESS. The ideal model for this case would be a model with 99% recall so that it could be assumed that anything the model rejects isn't a planet and allow the data scientists to look at a much smaller section of the data. If this was true for our limited analysis of 7,247 transit events, This would effectively reduce the analysis time by 66% for NASA data scientists. Because this model is only reading at 88% recall, it is too unreliable for the classification of transit events. 
                 </h5>
               </p>
+              <p>
                 <h4 style="color:yellow">Planet Habitability</h4>
                 <h5 style="color:white">
                 As for habitability, even though our analysis found that only 1.8% of all planets are potentially habitable
@@ -60,6 +62,7 @@
                 perspective, Mars, an as-far-as-we-know lifeless and inhospitable rock meets with an average temperature of 
                 210 Kelvin and a radius of .53 earth radii.
                 </h5>
+              </p>
                 <h4 style="color:yellow">Utility</h4>
                 <h5 style="color:white">
                 Even though NASA's Kepler mission has ended, there are several active planet-finding missions using 
@@ -67,7 +70,40 @@
                 like ours could potentially be adapted for these ongoing missions.
                 </h5>
               </p>
-              </h5>
+              <p>
+                <h4 style="color:yellow">References</h4>
+                <h5 style="color:white">
+                  <p>
+                  H. Valizadegan, M. Martinho, L. Wilkens, J. Jenkins, J. Smith, D. Caldwell, P. Gerum, N. Walia, K. Hausknecht, N. Lubin, J. Twicken, and N. Oza. “Exominer: A Highly Accurate And Explainable Deep Learning Classifier That Validates 200+ New Exoplanets”. Bulletin of the AAS. Volume 53. Issue 6. June 18, 2021.
+                  </p>
+                  Jeffrey Kluger AND Chris Wilson. It's Been 25 Years Since We Found the First Exoplanet. Now We Know of Thousands—and Some Could Harbor Life. Time. Time USA LLC. 6 Oct, 2020. 1 Mar, 2022.
+                  <p>
+                  NASA Exoplanet Archive
+                  NASA Exoplanet Science Institute
+                  https://exoplanetarchive.ipac.caltech.edu/
+                  </p>
+                  Planet Habitability Laboratory
+                  University of Puerto Rico at Arecibo
+                  https://phl.upr.edu/home
+                  <p>
+                  Images (other than our charts): NASA
+                  </p>
+                </h5>
+              </p>
+              <p>
+                <h4 style="color:yellow">About the team:</h4>
+                <h5 style="color:white">
+                  <p>
+                  Brute_Force is Kyle Beattie, Alex Hatheway and Daniel John Marshall
+                  </p>
+                  <p>
+                  <a href="https://github.com/LiShanDa2021/exoplanet_detector" style="color:lightblue">Github repo</a>
+                </p>
+                </h5>
+              </p>
+      
+              
+
             </div>
         
       
