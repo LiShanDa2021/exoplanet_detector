@@ -1,6 +1,7 @@
 # Clustering 
+
 Clustering.ipynb is used to create the clustering graph for our project
-3d_clsuter is a picture of our clustering
+3d_cluser is a picture of our clustering
 # Machine Learning
 Machine_Learning_Finished is the final product of our machine learning
 Machine_Learning_CSV's was data analysis used to make the tables we use for machine learning. 
